@@ -83,19 +83,6 @@ export const AddForm = styled.form`
   margin-bottom: 10px;
 `;
 
-export const AddInput = styled.input`
-  flex-grow: 1;
-  margin-right: 10px;
-  font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  padding: 5px;
-  &:focus {
-    outline: none;
-    border-bottom: 1px solid #333;
-  }
-`;
-
 export const Heading = styled.h1`
   font-size: 2rem;
   margin-bottom: 20px;
@@ -109,4 +96,38 @@ export const ListWrapper = styled.ul`
 export const ListItemWrapper = styled.div`
   position: relative;
   overflow: hidden;
+`;
+
+export const StyledForm = styled.form`
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 20px 20px;
+  z-index: 1000;
+  background-color: var(--header-bg-color);
+  gap: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-around;
+`;
+
+export const AddInput = styled.input`
+  flex-grow: 1;
+  // margin-right: 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 6px;
+  padding: 6px;
+`;
+
+export const SubmitButton = styled.button`
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  box-sizing: border-box;
 `;

@@ -38,7 +38,7 @@ const List = ({
   showItems = true,
   showEmptyCategories,
 }) => {
-  const { items, onEdit, onCheck, onDelete, categoryOrder } = useList();
+  const { items, onEdit, onCheck, categoryOrder } = useList();
   const filteredItems = items.filter((item) =>
     showComplete
       ? true
@@ -127,7 +127,6 @@ const List = ({
                   index={index}
                   onEdit={onEdit}
                   onCheck={onCheck}
-                  onDelete={onDelete}
                 />
               ))}
         </React.Fragment>

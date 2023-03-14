@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
 import {
   collection,
-  getDocs,
   doc,
   updateDoc,
   deleteDoc,
   setDoc,
-  getDoc,
-  onSnapshot,
   writeBatch,
 } from "firebase/firestore";
 import { db } from "./firebase";
@@ -23,7 +19,6 @@ import { useParams } from "react-router-dom";
 const functions = getFunctions();
 const callFetchCategory = httpsCallableFromURL(
   functions,
-  // the URL of the function
   "https://generatecategory-7tkwx2npeq-uc.a.run.app/generatecategory"
 );
 
@@ -31,18 +26,14 @@ const useList = () => {
   const params = useParams();
   const { listId } = params;
 
-  // const [items, setItems] = useState([]);
-  // const [listData, setListData] = useState({});
-
   const fetchCategory = (text, categoryOrder) => {
     return callFetchCategory({ text, categoryOrder }).then((result) => {
-      // Read result of the Cloud Function.
       console.log(result.data);
       return result.data;
     });
   };
 
-  const [items, loading, error] = useCollectionData(
+  const [items, itemsLoading, itemsError] = useCollectionData(
     collection(db, "lists", listId, "items"),
     { idField: "id" }
   );
@@ -156,11 +147,11 @@ const useList = () => {
     items: items
       ? items.sort((a, b) => {
           if (a.checked && !b.checked) {
-            return 1; // Move checked item below unchecked item
+            return 1;
           } else if (!a.checked && b.checked) {
-            return -1; // Move checked item above unchecked item
+            return -1;
           } else {
-            return a.text.localeCompare(b.text); // Compare texts alphabetically
+            return a.text.localeCompare(b.text);
           }
         })
       : [],

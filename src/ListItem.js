@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyledListItem, CheckButton, Input } from "./styled-components";
 import CategoryMenu from "./CategoryMenu";
 
-const ListItem = ({ item, onEdit, onCheck, onDelete }) => {
+const ListItem = ({ item, onEdit, onCheck }) => {
   const [text, setText] = useState(item.text);
   const [showMenu, setShowMenu] = useState(false);
 

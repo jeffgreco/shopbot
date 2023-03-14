@@ -6,7 +6,6 @@ import AddItem from "./AddItem";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { useParams } from "react-router-dom";
 import AddCategory from "./AddCategory";
 import Settings from "./Settings";
 
@@ -17,6 +16,7 @@ const Container = styled.div`
 `;
 
 const Navigation = styled.header`
+  font-weight: 400;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -34,24 +34,20 @@ const Navigation = styled.header`
 `;
 
 const NavigationItem = styled.button`
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 0 10px;
   border-radius: 5px;
-  background-color: ${({ active }) => (active ? "#a7d8a6" : "transparent")};
-  color: ${({ active }) => (active ? "#fff" : "#333")};
+  background-color: transparent;
+  color: #fff;
+  border-radius: 0;
+  border: 0;
+  height: 40px;
+  font-size: 14px;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid ${({ active }) => (active ? "#a7d8a6" : "transparent")};
 `;
 
 const ListPage = () => {
-  const {
-    items,
-    categoryOrder,
-    addItem,
-    editItem,
-    checkItem,
-    deleteItem,
-    updateCategoryOrder,
-    uncategorizeItems,
-  } = useList();
+  const { addItem, updateCategoryOrder, uncategorizeItems } = useList();
   const [activeTab, setActiveTab] = React.useState("list");
   const navItems = [
     { name: "List", activeTab: "list" },
@@ -64,14 +60,21 @@ const ListPage = () => {
     <Container>
       <ToastContainer position={"top-center"} autoClose={4000} />
       <Navigation>
-        <div>ShopBot</div>
+        <div>
+          <img
+            src="/cart-shopping-fast-solid.svg"
+            width={24}
+            alt=""
+            style={{ marginRight: 8 }}
+          />
+          ShopBot
+        </div>
         <div>
           {navItems.map((navItem) => (
             <NavigationItem
               key={navItem.activeTab}
               active={activeTab === navItem.activeTab}
               onClick={() => setActiveTab(navItem.activeTab)}
-              className="secondary"
             >
               {navItem.name}
             </NavigationItem>
