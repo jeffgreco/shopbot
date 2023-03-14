@@ -12,7 +12,6 @@ const AddItem = ({ onAdd }) => {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      Add
       <AddInput
         type="text"
         value={text}

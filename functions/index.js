@@ -8,7 +8,7 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY || openAiApiKey,
 });
 
-console.log("Debugging", process.env.OPENAI_API_KEY, openAiApiKey);
+// console.log("Debugging", process.env.OPENAI_API_KEY, openAiApiKey);
 
 const openai = new OpenAIApi(configuration);
 
@@ -23,10 +23,6 @@ exports.generatecategory = onCall(async (request) => {
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    // max_tokens: Number(max_tokens) || 2048,
-    // temperature: 0.34,
-    // top_p: 1,
-    // presence_penalty: 0.52,
     messages: [
       {
         role: "user",
@@ -35,29 +31,8 @@ exports.generatecategory = onCall(async (request) => {
     ],
   });
 
-  const category = completion.data.choices[0].message?.content?.trim();
+  const category =
+    completion?.data?.choices[0]?.message?.content?.trim() || false;
 
   return category;
-
-  //   const response = await fetch(openaiEndpoint, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${openaiApiKey}`,
-  //     },
-  //     body: JSON.stringify({
-  //       model: "gpt-3.5-turbo",
-  //       messages: [
-  //         {
-  //           role: "user",
-  //           content: prompt,
-  //         },
-  //       ],
-  //     }),
-  //   });
-  //   const data = await response.json();
-  //   const { choices } = data;
-  //   console.log({ choices });
-  //   const category = choices[0].message.content.trim();
-  //   return category;
 });

@@ -67,7 +67,6 @@ const ListPage = () => {
             alt=""
             style={{ marginRight: 8 }}
           />
-          ShopBot
         </div>
         <div>
           {navItems.map((navItem) => (
