@@ -60,7 +60,7 @@ const useList = () => {
   const addItem = async (text) => {
     const id = uuidv4();
     const timestamp = new Date().getTime();
-    const category = listData.useUserCategories
+    const category = listData?.useUserCategories
       ? await fetchCategory(text, categoryOrder)
       : await fetchCategory(text);
     const item = {

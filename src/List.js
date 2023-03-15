@@ -53,18 +53,16 @@ const List = ({ showComplete, showItems = true, showEmptyCategories }) => {
         <React.Fragment key={category}>
           <ListCategory
             style={{
-              justifyContent: "flex-start",
               cursor: "pointer",
-              paddingLeft: 0,
             }}
             onClick={() => toggleCategory(category)}
           >
+            <span>{category === false ? "Uncategorized" : category}</span>
             {showItems && (
               <button
                 style={{
                   background: "none",
                   border: "none",
-                  width: 52,
                   margin: 0,
                   color: "var(--subhead-btn-color)",
                 }}
@@ -76,7 +74,6 @@ const List = ({ showComplete, showItems = true, showEmptyCategories }) => {
                 />
               </button>
             )}
-            <span>{category === false ? "Uncategorized" : category}</span>
           </ListCategory>
           {showItems &&
             !collapsedCategories.has(category) &&
