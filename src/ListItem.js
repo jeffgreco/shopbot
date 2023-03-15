@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyledListItem, CheckButton, Input } from "./styled-components";
 import CategoryMenu from "./CategoryMenu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faEllipsisV } from "@fortawesome/sharp-solid-svg-icons";
 
 const ListItem = ({ item, onEdit, onCheck }) => {
   const [text, setText] = useState(item.text);
@@ -37,7 +39,7 @@ const ListItem = ({ item, onEdit, onCheck }) => {
     <StyledListItem>
       <div className="item">
         <CheckButton checked={item.checked} onClick={handleCheck}>
-          {item.checked ? "✔" : ""}
+          {item.checked ? <FontAwesomeIcon icon={faCheck} size="lg" /> : ""}
         </CheckButton>
         <form onSubmit={handleEdit}>
           <Input
@@ -50,8 +52,9 @@ const ListItem = ({ item, onEdit, onCheck }) => {
           />
         </form>
         <div className="buttons">
-          <button onClick={() => setShowMenu(!showMenu)}>⋮</button>
-          {/* <button onClick={() => onDelete(item.id)}>🗑</button> */}
+          <button className="tertiary" onClick={() => setShowMenu(!showMenu)}>
+            <FontAwesomeIcon icon={faEllipsisV} size="lg" />
+          </button>
         </div>
       </div>
       {showMenu && (

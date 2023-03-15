@@ -33,13 +33,11 @@ const useList = () => {
     });
   };
 
-  const [items, itemsLoading, itemsError] = useCollectionData(
+  const [items, ,] = useCollectionData(
     collection(db, "lists", listId, "items"),
     { idField: "id" }
   );
-  const [listData, listDataLoading, listDataError] = useDocumentData(
-    doc(db, "lists", listId)
-  );
+  const [listData, ,] = useDocumentData(doc(db, "lists", listId));
 
   const allCategories = items
     ? [...new Set(items.map((item) => item.category))]
@@ -49,7 +47,7 @@ const useList = () => {
   const categoryOrder = [
     ...storedCategoryOrder,
     ...allCategories.filter((cat) => !storedCategoryOrder.includes(cat)),
-  ];
+  ].filter((cat) => cat !== false);
 
   const updateCategoryOrder = async (newOrder) => {
     await setDoc(

@@ -3,11 +3,12 @@ import styled from "styled-components";
 import useList from "./useList";
 import List from "./List";
 import AddItem from "./AddItem";
-import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import AddCategory from "./AddCategory";
 import Settings from "./Settings";
+import CategoryList from "./CategoryList";
+import { Outlet, NavLink, Route, Routes } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 600px;
@@ -33,28 +34,28 @@ const Navigation = styled.header`
   }
 `;
 
-const NavigationItem = styled.button`
+const NavigationItem = styled(NavLink)`
   padding: 0 10px;
-  border-radius: 5px;
   background-color: transparent;
   color: #fff;
-  border-radius: 0;
   border: 0;
-  height: 40px;
+  // height: 40px;
   font-size: 14px;
   border-bottom: 4px solid transparent;
-  border-top: 4px solid ${({ active }) => (active ? "#a7d8a6" : "transparent")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid transparent;
+  height: fill-available;
+  text-decoration: none;
+
+  &.active {
+    border-top: 4px solid var(--header-text-color);
+  }
 `;
 
 const ListPage = () => {
   const { addItem, updateCategoryOrder, uncategorizeItems } = useList();
-  const [activeTab, setActiveTab] = React.useState("list");
-  const navItems = [
-    { name: "List", activeTab: "list" },
-    { name: "Archive", activeTab: "archive" },
-    { name: "Categories", activeTab: "categories" },
-    { name: "Settings", activeTab: "settings" },
-  ];
 
   return (
     <Container>
@@ -68,38 +69,44 @@ const ListPage = () => {
             style={{ marginRight: 8 }}
           />
         </div>
-        <div>
-          {navItems.map((navItem) => (
-            <NavigationItem
-              key={navItem.activeTab}
-              active={activeTab === navItem.activeTab}
-              onClick={() => setActiveTab(navItem.activeTab)}
-            >
-              {navItem.name}
-            </NavigationItem>
-          ))}
+        <div style={{ height: "100%" }}>
+          <NavigationItem to="" end>
+            List
+          </NavigationItem>
+          <NavigationItem to="archive">Archive</NavigationItem>
+          <NavigationItem to="categories">Categories</NavigationItem>
+          <NavigationItem to="settings">Settings</NavigationItem>
         </div>
       </Navigation>
-      {activeTab === "list" && (
-        <>
-          <AddItem onAdd={addItem} />
-          <List showComplete={false} />
-        </>
-      )}
-      {activeTab === "archive" && <List showComplete={true} />}
-      {activeTab === "categories" && (
-        <>
-          <AddCategory />
-          <List
-            showComplete={true}
-            showItems={false}
-            updateCategoryOrder={updateCategoryOrder}
-            uncategorizeItems={uncategorizeItems}
-            showEmptyCategories={true}
-          />
-        </>
-      )}
-      {activeTab === "settings" && <Settings />}
+      <Outlet />
+      <Routes>
+        <Route
+          path=""
+          element={
+            <>
+              <AddItem onAdd={addItem} />
+              <List showComplete={false} />
+            </>
+          }
+        />
+        <Route path="archive" element={<List showComplete={true} />} />
+        <Route
+          path="categories"
+          element={
+            <>
+              <AddCategory />
+              <CategoryList
+                showComplete={true}
+                showItems={false}
+                updateCategoryOrder={updateCategoryOrder}
+                uncategorizeItems={uncategorizeItems}
+                showEmptyCategories={true}
+              />
+            </>
+          }
+        />
+        <Route path="settings" element={<Settings />} />
+      </Routes>
     </Container>
   );
 };

@@ -13,32 +13,16 @@ const ListCategory = styled.li`
   margin: 0;
   position: sticky;
   top: 40px;
-  background: #c6d8af;
+  color: var(--subhead-text-color);
+  background: var(--subhead-bg-color);
   padding: 0 5px;
   z-index: 400;
   display: flex;
   justify-content: space-between;
 `;
 
-const arrayMove = (arr, old_index, new_index) => {
-  if (new_index >= arr.length) {
-    var k = new_index - arr.length + 1;
-    while (k--) {
-      arr.push(undefined);
-    }
-  }
-  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-  return arr; // for testing
-};
-
-const List = ({
-  updateCategoryOrder,
-  showComplete,
-  uncategorizeItems,
-  showItems = true,
-  showEmptyCategories,
-}) => {
-  const { items, onEdit, onCheck, categoryOrder } = useList();
+const List = ({ showComplete, showItems = true, showEmptyCategories }) => {
+  const { items, onEdit, checkItem, categoryOrder } = useList();
   const filteredItems = items.filter((item) =>
     showComplete
       ? true
@@ -62,60 +46,6 @@ const List = ({
         <React.Fragment key={category}>
           <ListCategory>
             <span>{category === false ? "Uncategorized" : category}</span>
-            {updateCategoryOrder && category !== false && (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, 1fr)",
-                }}
-              >
-                {index > 0 ? (
-                  <button
-                    className="secondary"
-                    onClick={() => {
-                      const newOrder = arrayMove(
-                        categoryOrder,
-                        index,
-                        index - 1
-                      );
-                      updateCategoryOrder(newOrder);
-                    }}
-                  >
-                    ⬆️
-                  </button>
-                ) : (
-                  <div />
-                )}
-                <button
-                  className="secondary"
-                  onClick={async () => {
-                    const newOrder = categoryOrder.filter(
-                      (c) => c !== category
-                    );
-                    console.log({ categoryOrder, newOrder });
-                    await uncategorizeItems(category);
-                    await updateCategoryOrder(newOrder);
-                  }}
-                >
-                  🗑️
-                </button>
-                {index !== finalCategoryOrder.length - 1 && (
-                  <button
-                    className="secondary"
-                    onClick={() => {
-                      const newOrder = arrayMove(
-                        categoryOrder,
-                        index,
-                        index + 1
-                      );
-                      updateCategoryOrder(newOrder);
-                    }}
-                  >
-                    ⬇️
-                  </button>
-                )}
-              </div>
-            )}
           </ListCategory>
           {showItems &&
             filteredItems
@@ -126,7 +56,7 @@ const List = ({
                   item={item}
                   index={index}
                   onEdit={onEdit}
-                  onCheck={onCheck}
+                  onCheck={checkItem}
                 />
               ))}
         </React.Fragment>

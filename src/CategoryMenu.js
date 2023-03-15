@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useList from "./useList";
 
@@ -80,7 +79,7 @@ const CategoryMenu = ({ currentCategory, onSelect }) => {
               key={category}
               onClick={() => handleSelect(category)}
             >
-              <button>{category}</button>
+              <button className="tertiary">{category}</button>
             </CategoryListItem>
           ) : null
         )}

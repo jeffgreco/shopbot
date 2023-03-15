@@ -1,13 +1,122 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* :root {
+  --body-bg-color: #e9f2e8;
+  --text-color: #3e3732;
+  --header-bg-color: #7da95c;
+  --header-text-color: #ffffff;
+  --primary-btn-bg-color: #7bc47f;
+  --primary-btn-text-color: #ffffff;
+  --secondary-btn-bg-color: #a7d8a6;
+  --secondary-btn-text-color: #3e3732;
+  --checkbox-btn-text-color: #7bc47f;
+  --btn-inactive-bg-color: #aaa;
+  --subhead-text-color: #221e1b;
+  --subhead-bg-color: #c6d8af;
+} */
+
+/* :root {
+  --body-bg-color: #e8f0f5;
+  --text-color: #3e3732;
+  --header-bg-color: #5c7da9;
+  --header-text-color: #ffffff;
+  --primary-btn-bg-color: #7fbcdd;
+  --primary-btn-text-color: #ffffff;
+  --secondary-btn-bg-color: #a6d0e0;
+  --secondary-btn-text-color: #3e3732;
+  --checkbox-btn-text-color: #7fbcdd;
+  --btn-inactive-bg-color: #aaa;
+  --subhead-text-color: #221e1b;
+  --subhead-bg-color: #afc6d8;
+} */
+
+:root {
+  --body-bg-color: #ffffff;
+  --text-color: #000000;
+  --header-bg-color: #1e3c72;
+  --header-text-color: #ffffff;
+  --primary-btn-bg-color: #1e5f98;
+  --primary-btn-text-color: #ffffff;
+  --secondary-btn-bg-color: #5791c9;
+  --secondary-btn-text-color: #ffffff;
+  --tertiary-btn-bg-color: #f4f4f4;
+  --tertiary-btn-text-color: #1e5f98;
+  --checkbox-btn-text-color: #1e5f98;
+  --btn-inactive-bg-color: #aaa;
+  --subhead-text-color: #221e1b;
+  --subhead-bg-color: #a9c9e0;
+}
+
+body {
+  background-color: var(--body-bg-color);
+  color: var(--text-color);
+  font-family: "SF Pro Rounded", "SF Rounded", -apple-system, system-ui,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
+    "San Francisco Rounded", "Helvetica Rounded";
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+header {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  padding: 0 0;
+  text-align: center;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button.primary {
+  background-color: var(--primary-btn-bg-color);
+  color: var(--primary-btn-text-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  border: none;
+  border-radius: 5px;
+  background-color: var(--secondary-btn-bg-color);
+  color: var(--secondary-btn-text-color);
+}
+
+button.tertiary {
+  border: none;
+  border-radius: 5px;
+  background-color: var(--tertiary-btn-bg-color);
+  color: var(--tertiary-btn-text-color);
+}
+
+button.primary.inactive {
+  background-color: var(--btn-inactive-bg-color);
+  color: var(--primary-btn-text-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
 }

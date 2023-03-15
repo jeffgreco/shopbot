@@ -27,7 +27,8 @@ export const CheckButton = styled.button`
   border: 1px solid #ccc;
   border-radius: 100%;
   color: white;
-  background-color: ${({ checked }) => (checked ? "#7bc47f" : "transparent")};
+  background-color: ${({ checked }) =>
+    checked ? "var(--primary-btn-bg-color)" : "transparent"};
   margin-right: 10px;
   display: flex;
   justify-content: center;
@@ -130,4 +131,22 @@ export const SubmitButton = styled.button`
   border-radius: 5px;
   font-size: 1.2rem;
   box-sizing: border-box;
+`;
+
+export const ListContainer = styled.ul`
+  list-style: none;
+  padding: 0 0 24px;
+`;
+
+export const ListCategory = styled.li`
+  font-weight: bold;
+  margin: 0;
+  position: sticky;
+  top: 40px;
+  color: var(--subhead-text-color);
+  background: var(--subhead-bg-color);
+  padding: 0 5px;
+  z-index: 400;
+  display: flex;
+  justify-content: space-between;
 `;

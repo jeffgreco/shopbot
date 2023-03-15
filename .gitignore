@@ -26,3 +26,5 @@ hosting.*.cache
 
 /functions/node_modules
 /functions/.env
+.npmrc
+*firebase-debug.log
