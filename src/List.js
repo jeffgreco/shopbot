@@ -1,38 +1,35 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
+import { ListCategory, ListContainer } from "./styled-components";
 import useList from "./useList";
-
-const ListContainer = styled.ul`
-  list-style: none;
-  padding: 0 0 24px;
-`;
-
-const ListCategory = styled.li`
-  font-weight: bold;
-  margin: 0;
-  position: sticky;
-  top: 40px;
-  color: var(--subhead-text-color);
-  background: var(--subhead-bg-color);
-  padding: 0 5px;
-  z-index: 400;
-  display: flex;
-  justify-content: space-between;
-`;
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus } from "@fortawesome/sharp-solid-svg-icons";
 
 const List = ({ showComplete, showItems = true, showEmptyCategories }) => {
   const { items, onEdit, checkItem, categoryOrder } = useList();
+  const [collapsedCategories, setCollapsedCategories] = useState(() => {
+    const storedCollapsedCategories = localStorage.getItem(
+      "collapsedCategories"
+    );
+    return storedCollapsedCategories
+      ? new Set(JSON.parse(storedCollapsedCategories))
+      : new Set();
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "collapsedCategories",
+      JSON.stringify([...collapsedCategories])
+    );
+  }, [collapsedCategories]);
+
   const filteredItems = items.filter((item) =>
     showComplete
       ? true
       : !item.checked || item.completedAt.toDate() > Date.now() - 90 * 1000
   );
 
-  console.log({ items });
-
   const categories = [...new Set(filteredItems.map((item) => item.category))];
-
   const finalCategoryOrder = categoryOrder
     .filter(
       (c) =>
@@ -40,14 +37,49 @@ const List = ({ showComplete, showItems = true, showEmptyCategories }) => {
     )
     .concat(!showEmptyCategories && categories.includes(false) ? [false] : []);
 
+  const toggleCategory = (category) => {
+    const newCollapsedCategories = new Set(collapsedCategories);
+    if (collapsedCategories.has(category)) {
+      newCollapsedCategories.delete(category);
+    } else {
+      newCollapsedCategories.add(category);
+    }
+    setCollapsedCategories(newCollapsedCategories);
+  };
+
   return (
     <ListContainer>
       {finalCategoryOrder.map((category, index) => (
         <React.Fragment key={category}>
-          <ListCategory>
+          <ListCategory
+            style={{
+              justifyContent: "flex-start",
+              cursor: "pointer",
+              paddingLeft: 0,
+            }}
+            onClick={() => toggleCategory(category)}
+          >
+            {showItems && (
+              <button
+                style={{
+                  background: "none",
+                  border: "none",
+                  width: 54,
+                  margin: 0,
+                  color: "var(--subhead-btn-color)",
+                }}
+              >
+                <FontAwesomeIcon
+                  fixedWidth
+                  size="lg"
+                  icon={collapsedCategories.has(category) ? faPlus : faMinus}
+                />
+              </button>
+            )}
             <span>{category === false ? "Uncategorized" : category}</span>
           </ListCategory>
           {showItems &&
+            !collapsedCategories.has(category) &&
             filteredItems
               .filter((item) => item.category === category)
               .map((item, index) => (

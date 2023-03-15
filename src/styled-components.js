@@ -12,7 +12,7 @@ export const StyledListItem = styled.li`
   form {
     flex-grow: 1;
   }
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--list-divider-color);
   .buttons {
     display: flex;
     gap: 8px;
@@ -24,7 +24,7 @@ export const CheckButton = styled.button`
   width: 32px;
   overflow: hidden;
   height: 32px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--checkbox-border-color);
   border-radius: 100%;
   color: white;
   background-color: ${({ checked }) =>
@@ -145,8 +145,9 @@ export const ListCategory = styled.li`
   top: 40px;
   color: var(--subhead-text-color);
   background: var(--subhead-bg-color);
-  padding: 0 5px;
+  padding: 4px 5px;
   z-index: 400;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2px;
 `;

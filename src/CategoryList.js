@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltDown,
   faArrowAltUp,
+  faGripDotsVertical,
   faTrashAlt,
 } from "@fortawesome/sharp-solid-svg-icons";
 import React from "react";
@@ -77,6 +78,11 @@ const CategoryList = ({
                       {...provided.dragHandleProps}
                     >
                       <span>
+                        <FontAwesomeIcon
+                          className="grip"
+                          icon={faGripDotsVertical}
+                          fixedWidth
+                        />
                         {category === false ? "Uncategorized" : category}
                       </span>
                       {updateCategoryOrder && category !== false && (

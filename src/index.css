@@ -57,10 +57,13 @@ code {
   --btn-inactive-bg-color: #aaa;
   --subhead-text-color: #221e1b;
   --subhead-bg-color: #a9c9e0;
+  --subhead-btn-color: #1e3c72;
+  --list-divider-color: #d7eaef;
+  --checkbox-border-color: #d7eaef;
 }
 
 body {
-  background-color: var(--body-bg-color);
+  background-color: var(--header-bg-color);
   color: var(--text-color);
   font-family: "SF Pro Rounded", "SF Rounded", -apple-system, system-ui,
     BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
@@ -68,6 +71,11 @@ body {
     "San Francisco Rounded", "Helvetica Rounded";
   font-size: 1.2rem;
   line-height: 1.5;
+}
+
+#root {
+  background-color: var(--body-bg-color);
+  min-height: 100vh;
 }
 
 header {
