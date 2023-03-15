@@ -64,7 +64,7 @@ const List = ({ showComplete, showItems = true, showEmptyCategories }) => {
                 style={{
                   background: "none",
                   border: "none",
-                  width: 54,
+                  width: 52,
                   margin: 0,
                   color: "var(--subhead-btn-color)",
                 }}

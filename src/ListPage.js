@@ -50,7 +50,7 @@ const NavigationItem = styled(NavLink)`
   text-decoration: none;
 
   &.active {
-    border-top: 4px solid var(--header-text-color);
+    border-bottom: 3px solid var(--header-text-color);
   }
 `;
 
